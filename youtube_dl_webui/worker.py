@@ -16,6 +16,7 @@ class YdlHook(object):
         self.logger = logging.getLogger('ydl_webui')
         self.tid = tid
         self.msg_cli = msg_cli
+        self.finished = false
 
     def finished(self, d):
         self.logger.debug('finished status')
