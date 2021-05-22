@@ -16,11 +16,11 @@ class YdlHook(object):
         self.logger = logging.getLogger('ydl_webui')
         self.tid = tid
         self.msg_cli = msg_cli
-        self.finished = False
+        self.is_finished = False
 
     def finished(self, d):
         self.logger.debug('finished status')
-        self.finished = True
+        self.is_finished = True
         d['_percent_str'] = '100%'
         d['speed'] = '0'
         d['elapsed'] = 0
@@ -29,12 +29,12 @@ class YdlHook(object):
         return d
 
     def downloading(self, d):
-        self.finished = False
+        self.is_finished = False
         self.logger.debug('downloading status')
         return d
 
     def error(self, d):
-        self.finished = True
+        self.is_finished = True
         self.logger.debug('error status')
         #  d['_percent_str'] = '100%'
         return d
@@ -45,11 +45,11 @@ class YdlHook(object):
         if 'tmpfilename' not in d:
             d['tmpfilename'] = ''
 
-        if d['status'] == 'finished' and not self.finished:
-            d = self.finished(d)
+        if d['status'] == 'finished' and not self.is_finished:
+            d = self.is_finished(d)
         elif d['status'] == 'downloading':
             d = self.downloading(d)
-        elif d['error'] == 'error' and not self.finished:
+        elif d['error'] == 'error' and not self.is_finished:
             d = self.error(d)
         self.msg_cli.put('progress', {'tid': self.tid, 'data': d})
 
