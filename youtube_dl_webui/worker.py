@@ -46,7 +46,7 @@ class YdlHook(object):
             d['tmpfilename'] = ''
 
         if d['status'] == 'finished' and not self.is_finished:
-            d = self.is_finished(d)
+            d = self.finished(d)
         elif d['status'] == 'downloading':
             d = self.downloading(d)
         elif d['error'] == 'error' and not self.is_finished:
