@@ -16,11 +16,11 @@ class YdlHook(object):
         self.logger = logging.getLogger('ydl_webui')
         self.tid = tid
         self.msg_cli = msg_cli
-        self.finished = false
+        self.finished = False
 
     def finished(self, d):
         self.logger.debug('finished status')
-        self.finished = true
+        self.finished = True
         d['_percent_str'] = '100%'
         d['speed'] = '0'
         d['elapsed'] = 0
@@ -29,12 +29,12 @@ class YdlHook(object):
         return d
 
     def downloading(self, d):
-        self.finished = false
+        self.finished = False
         self.logger.debug('downloading status')
         return d
 
     def error(self, d):
-        self.finished = true
+        self.finished = True
         self.logger.debug('error status')
         #  d['_percent_str'] = '100%'
         return d
