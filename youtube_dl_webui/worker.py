@@ -105,6 +105,7 @@ class Worker(Process):
         self.ydl_opts['progress_hooks'] = [self.ydl_hook.dispatcher]
         self.ydl_opts['noplaylist'] = "false"
         self.ydl_opts['progress_with_newline'] = True
+        self.ydl_opts['cookies'] = "/cookies.txt"
 
     def run(self):
         self.intercept_ydl_opts()
